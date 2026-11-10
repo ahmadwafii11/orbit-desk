@@ -1,0 +1,72 @@
+# ==============================================================================
+# 1. Rust / Tauri (Backend)
+# ==============================================================================
+# Hasil kompilasi dan executable Rust
+/src-tauri/target/
+
+# Schema untuk auto-completion capabilities Tauri
+/src-tauri/gen/schemas/
+
+# Log error Cargo
+cargo-crash.log
+
+# Backup Cargo (jika ada konflik git saat merge)
+*.rs.bk
+
+# ==============================================================================
+# 2. Node.js / React / TypeScript (Frontend)
+# ==============================================================================
+# Dependency packages
+node_modules/
+jspm_packages/
+
+# Hasil build frontend (sesuaikan jika memakai Next.js atau build folder lain)
+/dist/
+/out/
+/build/
+
+# Log dari npm, yarn, dan pnpm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Tumpukan memori v8
+v8.env.bak
+.v8flags*.json
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# ==============================================================================
+# 3. Environment Variables & Secrets (Sangat Penting!)
+# ==============================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Keys & Certificates (Untuk code signing app)
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+
+# ==============================================================================
+# 4. Editor & OS Artifacts
+# ==============================================================================
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# WebStorm / IntelliJ IDEA
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
