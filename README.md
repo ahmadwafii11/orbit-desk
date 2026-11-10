@@ -1,2 +1,2 @@
-# temporary-storage-tools
-just project individual
+# orbit-desk
+just project app desktop individual
