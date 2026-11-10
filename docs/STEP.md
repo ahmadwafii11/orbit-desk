@@ -36,3 +36,9 @@ Choose your UI flavor | TypeScript
 pnpm add tailwindcss @tailwindcss/vite \
 pnpm add lucide-react \
 pnpm add react-router-dom
+
+## Menjalankan Tauri App
+pnpm tauri dev
+
+## Membuat Tauri App
+pnpm tauri build
