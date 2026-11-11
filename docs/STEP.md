@@ -35,7 +35,8 @@ Choose your UI flavor | TypeScript
 ## Instalasies Dependencies
 pnpm add tailwindcss @tailwindcss/vite \
 pnpm add lucide-react \
-pnpm add react-router-dom
+pnpm add react-router-dom \
+pnpm add zustand
 
 ## Menjalankan Tauri App
 pnpm tauri dev
