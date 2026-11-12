@@ -43,3 +43,6 @@ pnpm tauri dev
 
 ## Membuat Tauri App
 pnpm tauri build
+
+## Merubah icon
+pnpm tauri icon public/orbit_desk.png --fit contain
