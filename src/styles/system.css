@@ -1,0 +1,239 @@
+/* StatCard.tsx, DiskList.tsx, System.tsx and SystemWidget.tsx */
+@layer components {
+    .system-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .system-section {
+        margin-top: 10px;
+    }
+
+    .uptime-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    .system-error {
+        margin-bottom: 10px;
+        border-color: rgba(224, 122, 122, 0.4);
+        color: #e8a0a0;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    /* Kartu statistik (CPU, Memory) */
+
+    .stat-card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .stat-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4px;
+        color: #aaaab5;
+    }
+
+    .stat-card-top svg {
+        color: var(--accent);
+    }
+
+    .stat-value {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -1px;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .stat-value small {
+        margin-left: 2px;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    .stat-detail {
+        margin: 0;
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    .system-section>.usage-bar {
+        margin-top: 10px;
+    }
+
+    .system-section>.usage-bar+.stat-detail {
+        margin-top: 8px;
+    }
+
+    /* Daftar disk */
+
+    .disk-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .disk-list .usage-bar {
+        margin: 7px 0;
+    }
+
+    .disk-row-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .disk-name {
+        min-width: 0;
+        overflow: hidden;
+        font-size: 11px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .disk-badges {
+        display: flex;
+        flex-shrink: 0;
+        gap: 5px;
+    }
+
+    .disk-badge {
+        padding: 1px 6px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        color: var(--muted);
+        font-size: 8px;
+        letter-spacing: 0.4px;
+    }
+
+    /* Per-thread CPU */
+
+    .core-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(14px, 1fr));
+        gap: 5px;
+        height: 56px;
+        margin-top: 10px;
+    }
+
+    .core-bar {
+        position: relative;
+        border-radius: 4px;
+        background: #35353d;
+        overflow: hidden;
+    }
+
+    .core-bar>span {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--accent);
+        transition: height 0.4s ease;
+    }
+
+    /* Info sistem */
+
+    .system-info h3 {
+        margin: 0 0 6px;
+        font-size: 12px;
+    }
+
+    .system-info dl {
+        margin: 0;
+    }
+
+    .system-info dl>div {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 10px;
+    }
+
+    .system-info dl>div:last-child {
+        border-bottom: 0;
+    }
+
+    .system-info dt {
+        flex-shrink: 0;
+        color: var(--muted);
+    }
+
+    .system-info dd {
+        min-width: 0;
+        margin: 0;
+        overflow: hidden;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Widget ringkas di Dashboard */
+
+    .system-widget {
+        grid-column: 1 / -1;
+    }
+
+    .system-widget-meters {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .mini-meter-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .mini-meter-label {
+        color: var(--muted);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.1px;
+    }
+
+    .mini-meter-value {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .mini-meter-detail {
+        margin: 7px 0 0;
+        overflow: hidden;
+        color: var(--muted);
+        font-size: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    @media (max-width: 520px) {
+        .system-widget-meters {
+            gap: 10px;
+        }
+
+        .mini-meter-value {
+            font-size: 16px;
+        }
+    }
+}
