@@ -1,2 +1,3 @@
 @import "./app.css";                     /* layout utama aplikasi                              */
 @import "./section-heading.css";         /* style for section-heading.tsx                      */
+@import "./meter.css";                   /* style for UsageBar.tsx and Sparkline.tsx           */
