@@ -2,3 +2,4 @@
 @import "./section-heading.css";         /* style for section-heading.tsx                                         */
 @import "./meter.css";                   /* style for UsageBar.tsx and Sparkline.tsx                              */
 @import "./system.css";                  /* style for StatCard.tsx, DiskList.tsx, System.tsx and SystemWidget.tsx */
+@import "./desktop-widget.css";          /* style for DesktopWidgetFrame.tsx, SystemDesktopWidget.tsx, and PinWidgetButton.tsx */

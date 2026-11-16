@@ -1,0 +1,275 @@
+/* Mode widget desktop: DesktopWidgetFrame.tsx, SystemDesktopWidget.tsx, dan PinWidgetButton.tsx. */
+@layer components {
+
+  /* Jendela widget transparan: buang latar, ukuran minimum, dan scroll. */
+  html[data-mode="widget"],
+  html[data-mode="widget"] body,
+  html[data-mode="widget"] #root {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .desktop-widget {
+    /* Token warna disalin karena widget tidak dirender di dalam .orbit-app */
+    --muted: #85858f;
+    --accent: #b8a1ff;
+    --border: rgba(255, 255, 255, 0.075);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100vw;
+    height: 100vh;
+    padding: 12px 14px 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    background: rgba(16, 16, 18, 0.88);
+    color: #f4f4f5;
+    user-select: none;
+  }
+
+  /* ---- Area drag ----
+   data-tauri-drag-region hanya bekerja di elemen yang diberi atribut, jadi
+   anak-anaknya tidak boleh menangkap klik.
+
+   Widget biasa: seluruh permukaan adalah area drag.
+   Widget interaktif (data-interactive="true"): hanya header. */
+
+  .desktop-widget:not([data-interactive="true"]) *,
+  .desktop-widget[data-interactive="true"] .desktop-widget-header * {
+    pointer-events: none;
+  }
+
+  /* Tombol di header selalu bisa diklik (spesifisitas sengaja lebih tinggi). */
+  .desktop-widget .desktop-widget-header .desktop-widget-button,
+  .desktop-widget .desktop-widget-header .desktop-widget-button * {
+    pointer-events: auto;
+  }
+
+  .desktop-widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 20px;
+  }
+
+  .desktop-widget-title {
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+  }
+
+  .desktop-widget-controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .desktop-widget-button {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .desktop-widget:hover .desktop-widget-button,
+  .desktop-widget-button[aria-pressed="true"] {
+    opacity: 1;
+  }
+
+  .desktop-widget-button[aria-pressed="true"] {
+    color: var(--accent);
+  }
+
+  .desktop-widget-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  /* ---- Widget System ---- */
+
+  .widget-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .widget-row-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .widget-row-label {
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .widget-row-detail {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .widget-row-value {
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .desktop-widget .sparkline {
+    height: 20px;
+  }
+
+  /* ---- Widget Notes ---- */
+
+  .desktop-notes-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .desktop-notes-counter {
+    flex: 1;
+    color: var(--muted);
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .desktop-notes-button {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .desktop-notes-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .desktop-notes-button:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .desktop-widget[data-interactive="true"] textarea {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    padding: 10px;
+    resize: none;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: 0;
+    background: rgba(255, 255, 255, 0.03);
+    color: #f4f4f5;
+    font: inherit;
+    font-size: 12px;
+    line-height: 1.55;
+    /* WebKit tidak mengizinkan mengetik di dalam induk dengan
+     user-select: none, jadi textarea harus dikecualikan. */
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  .desktop-widget[data-interactive="true"] textarea:focus {
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .desktop-widget[data-interactive="true"] textarea::placeholder {
+    color: #777781;
+  }
+
+  .desktop-notes-empty {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .desktop-notes-empty p {
+    margin: 0;
+  }
+
+  .desktop-notes-create {
+    padding: 6px 11px;
+    border: 0;
+    border-radius: 8px;
+    background: #e2d8ff;
+    color: #20182f;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .desktop-notes-footer {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 9px;
+  }
+
+  .desktop-widget .save-state[data-state="error"] {
+    color: #e07a7a;
+  }
+
+  /* ---- Tombol "Pin to desktop" di halaman System dan Notes ---- */
+
+  .heading-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .pin-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: #b5b5bf;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .pin-button:hover {
+    background: var(--surface-hover);
+    color: white;
+  }
+
+  .pin-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
