@@ -1,0 +1,47 @@
+/* Style for Header.tsx */
+@layer components {
+    .app-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 3px 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.6px;
+    }
+
+    .brand-light {
+        color: #9696a1;
+        font-weight: 400;
+    }
+
+    .header-right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .header-status {
+        font-size: 10px;
+        color: var(--muted);
+        margin-right: 6px;
+    }
+
+    .status-indicator {
+        width: 6px;
+        height: 6px;
+        background: #79cda3;
+        border-radius: 50%;
+    }
+}

@@ -6,3 +6,4 @@
 @import "./widget.css";                  /* style for widget app (main utama app desktop)      */
 @import "./button.css";                  /* styles for a base button used across components    */
 @import "./icon.css";                    /* style for Icon.tsx                                 */
+@import "./header.css";                  /* style for Header.tsx                               */
