@@ -1,0 +1,65 @@
+/* style for widget app (main utama app desktop) */
+@layer components {
+    .widget-label {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.1px;
+        color: var(--muted);
+    }
+
+    .widget {
+        min-width: 0;
+        padding: 15px;
+        background: linear-gradient(145deg,
+                rgba(255, 255, 255, 0.055),
+                rgba(255, 255, 255, 0.018));
+        border: 1px solid var(--border);
+        border-radius: 13px;
+        text-align: left;
+    }
+
+    button.widget {
+        width: 100%;
+        transition: 0.2s ease;
+    }
+
+    button.widget:hover {
+        background: var(--surface-hover);
+        border-color: rgba(255, 255, 255, 0.16);
+        transform: translateY(-2px);
+    }
+
+    .widget-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #aaaab5;
+        margin-bottom: 13px;
+    }
+
+    .widget h2 {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: -1px;
+    }
+
+    .widget h2 small {
+        font-size: 11px;
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    .widget-description {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    @media (max-width: 520px) {
+        .widget {
+            padding: 11px;
+        }
+    }
+}
