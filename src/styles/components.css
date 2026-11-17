@@ -5,3 +5,4 @@
 @import "./desktop-widget.css";          /* style for DesktopWidgetFrame.tsx, SystemDesktopWidget.tsx, and PinWidgetButton.tsx */
 @import "./widget.css";                  /* style for widget app (main utama app desktop)      */
 @import "./button.css";                  /* styles for a base button used across components    */
+@import "./icon.css";                    /* style for Icon.tsx                                 */
