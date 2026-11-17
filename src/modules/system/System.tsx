@@ -1,7 +1,9 @@
 import { ArrowLeftRight, Clock, Cpu, MemoryStick } from "lucide-react";
 
 import { SectionHeading } from "../../components/layout/SectionHeading";
+import { PinWidgetButton } from "../../components/widget/PinWidgetButton";
 import { UsageBar } from "../../components/system/UsageBar";
+
 import { formatBytes, formatDuration, toPercent } from "../../lib/format";
 import { DiskList } from "./DiskList";
 import { StatCard } from "./StatCard";
@@ -31,6 +33,8 @@ export function System() {
                 <span>Up {formatDuration(stats.uptimeSecs)}</span>
               </div>
             )}
+
+            <PinWidgetButton moduleId="system" />
           </div>
         }
       />
