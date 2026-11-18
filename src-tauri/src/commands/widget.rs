@@ -19,3 +19,9 @@ pub fn close_widget(window: WebviewWindow) -> Result<(), AppError> {
     window.close()?;
     Ok(())
 }
+
+// Memindahkan window widget yang memanggil command ini ke layer atas atau bawah.
+#[tauri::command]
+pub fn set_widget_layer(window: WebviewWindow, floating: bool) -> Result<(), AppError> {
+    widget_window::set_layer(&window, floating)
+}
