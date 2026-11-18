@@ -2,9 +2,10 @@
 // Setiap widget adalah jendela Tauri yang terpisah dengan label `widget-<modul>`.
 // Frontend mengenali mode widget dari label itu (lihat di `src/main.tsx`)
 use tauri::{
-    AppHandle,
-    Manager,
-    WebviewUrl,
+    AppHandle, 
+    Manager, 
+    WebviewUrl, 
+    WebviewWindow,
     WebviewWindowBuilder,
 };
 
@@ -14,18 +15,35 @@ use crate::core::error::AppError;
 const SCREEN_MARGIN_X: f64 = 24.0;
 const SCREEN_MARGIN_Y: f64 = 56.0;
 
-// Ukuran awal (lebar, tinggi) per modul.
+// Ukuran awal dan posisi sebyah widget.
+struct WidgetSpec {
+    width: f64,
+    height: f64,
+    offset_x: f64, // Gesekan ke kiri dari tepi kanan layar agar beberapa widget yang dibuka bersamaan tidak saling menumpuk
+}
+
 // Modul yang tidak terdapat disini tidak dapat dibuka sebagai widget.
-fn widget_size(module: &str) -> Option<(f64, f64)> {
+fn widget_spec(module: &str) -> Option<WidgetSpec> {
     match module {
-        "system" => Some((288.0, 236.0)),
+        "system" => Some(WidgetSpec { 
+            width: 288.0, 
+            height: 236.0, 
+            offset_x: 0.0 
+        }),
+
+        // Di sebelah kiri widget System (lebar 280 + jarak 16).
+        "notes" => Some(WidgetSpec { 
+            width: 320.0, 
+            height: 380.0, 
+            offset_x: 296.0, 
+        }),
         _=> None,
     }
 }
 
 // Posisi pojok kanan-atas monitor utama, atau `None` jika tidak terbaca.
 // (Window kemudian ditaruh di posisi default sistem).
-fn top_right_position(app: &AppHandle, width: f64) -> Option<(f64, f64)> {
+fn top_right_position(app: &AppHandle, spec: &WidgetSpec) -> Option<(f64, f64)> {
     let monitor = app.primary_monitor().ok().flatten()?;
     let scale = monitor.scale_factor();
 
@@ -34,7 +52,7 @@ fn top_right_position(app: &AppHandle, width: f64) -> Option<(f64, f64)> {
     let screen_width = monitor.size().width as f64 / scale;
 
     Some((
-        screen_x + screen_width - width - SCREEN_MARGIN_X,
+        screen_x + screen_width - spec.width - SCREEN_MARGIN_X - spec.offset_x,
         screen_y + SCREEN_MARGIN_Y,
     ))
 }
@@ -42,8 +60,7 @@ fn top_right_position(app: &AppHandle, width: f64) -> Option<(f64, f64)> {
 // Membuka widget untuk `module`
 // Jika sudah terbuka, cukup ditampilkan lagi.
 pub fn open(app: &AppHandle, module: &str) -> Result<(), AppError> {
-    let (width, height) =
-        widget_size(module).ok_or_else(|| AppError::UnknownWidget(module.to_string()))?;
+    let spec = widget_spec(module).ok_or_else(|| AppError::UnknownWidget(module.to_string()))?;
 
     let label = format!("widget-{module}");
 
@@ -54,7 +71,7 @@ pub fn open(app: &AppHandle, module: &str) -> Result<(), AppError> {
 
     let mut builder = WebviewWindowBuilder::new(app, &label, WebviewUrl::App("index.html".into()))
         .title(format!("Orbit Desk – {module}"))
-        .inner_size(width, height)
+        .inner_size(spec.width, spec.height)
         .resizable(false)
         .decorations(false)
         .transparent(true)
@@ -64,10 +81,25 @@ pub fn open(app: &AppHandle, module: &str) -> Result<(), AppError> {
         .visible_on_all_workspaces(true)
         .focused(false);
 
-    if let Some((x, y)) = top_right_position(app, width) {
+    if let Some((x, y)) = top_right_position(app, &spec) {
         builder = builder.position(x, y);
     }
 
     builder.build()?;
+    Ok(())
+}
+
+/// Memindahkan widget ke lapisan atas 
+/// (`floating = true`, mengambang di atas window lain) atau kembali ke lapisan bawah (menempel di desktop).
+/// Dua mode ini saling meniadakan, jadi yang lama dimatikan lebih dulu.
+pub fn set_layer(window: &WebviewWindow, floating: bool) -> Result<(), AppError> {
+    if floating {
+        window.set_always_on_bottom(false)?;
+        window.set_always_on_top(true)?;
+    } else {
+        window.set_always_on_top(false)?;
+        window.set_always_on_bottom(true)?;
+    }
+
     Ok(())
 }
