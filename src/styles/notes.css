@@ -1,0 +1,274 @@
+/* style for Notes.tsx, NotesList.tsx, NoteEditor.tsx, NotesPreview.tsx */
+@layer components {
+    .notes-new-button {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 12px;
+        border: 0;
+        border-radius: 9px;
+        background: #e2d8ff;
+        color: #20182f;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .notes-new-button:hover {
+        background: white;
+    }
+
+    .notes-error {
+        margin-bottom: 10px;
+        border-color: rgba(224, 122, 122, 0.4);
+        color: #e8a0a0;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    /* Tata letak dua panel: daftar di kiri, editor di kanan */
+
+    .notes-layout {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 10px;
+        height: 430px;
+    }
+
+    /* Daftar catatan */
+
+    .notes-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-height: 0;
+        padding: 8px;
+    }
+
+    .notes-search {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 9px;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        color: var(--muted);
+    }
+
+    .notes-search:focus-within {
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .notes-search input {
+        flex: 1;
+        min-width: 0;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--text);
+        font-size: 11px;
+    }
+
+    .notes-items {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 2px;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+        list-style: none;
+    }
+
+    .note-item {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        width: 100%;
+        padding: 8px 9px;
+        border: 1px solid transparent;
+        border-radius: 9px;
+        background: transparent;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.15s;
+    }
+
+    .note-item:hover {
+        background: var(--surface-hover);
+    }
+
+    .note-item.active {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: #34343d;
+    }
+
+    .note-item-title {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .note-item-title svg {
+        flex-shrink: 0;
+        color: var(--accent);
+    }
+
+    .note-item-title-text,
+    .note-item-preview,
+    .note-item-time {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .note-item-preview {
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    .note-item-time {
+        color: #666670;
+        font-size: 9px;
+    }
+
+    .notes-list-empty {
+        margin: auto;
+        padding: 16px;
+        color: var(--muted);
+        font-size: 10px;
+        text-align: center;
+    }
+
+    /* Editor */
+
+    .notes-editor {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .notes-editor-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 8px 6px 14px;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 10px;
+    }
+
+    .notes-editor-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .notes-pin[aria-pressed="true"] {
+        color: var(--accent);
+    }
+
+    .notes-delete {
+        padding: 6px 9px;
+        border: 0;
+        border-radius: 7px;
+        background: transparent;
+        color: var(--muted);
+        font-size: 10px;
+        cursor: pointer;
+        transition: 0.15s;
+    }
+
+    .notes-delete:hover,
+    .notes-delete[data-confirm="true"] {
+        background: rgba(224, 122, 122, 0.14);
+        color: #e8a0a0;
+    }
+
+    .notes-editor textarea {
+        flex: 1;
+        width: 100%;
+        min-height: 0;
+        padding: 16px;
+        resize: none;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--text);
+        font: inherit;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .notes-editor textarea::placeholder {
+        color: #777781;
+    }
+
+    .notes-editor-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 14px;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 9px;
+    }
+
+    .save-state[data-state="error"] {
+        color: #e07a7a;
+    }
+
+    /* Belum ada catatan yang dipilih */
+
+    .notes-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .notes-empty h3 {
+        margin: 13px 0 4px;
+        color: #dddde3;
+        font-size: 13px;
+    }
+
+    .notes-empty p {
+        margin: 0;
+        font-size: 10px;
+    }
+
+    /* Kartu Quick Notes di Dashboard: maksimal dua baris */
+
+    .notes-widget .notes-preview {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    @media (max-width: 560px) {
+        .notes-layout {
+            grid-template-columns: 1fr;
+            height: auto;
+        }
+
+        .notes-list {
+            max-height: 170px;
+        }
+
+        .notes-editor,
+        .notes-empty {
+            height: 320px;
+        }
+    }
+}
