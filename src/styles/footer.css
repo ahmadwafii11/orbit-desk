@@ -1,0 +1,14 @@
+/* style for Footer.tsx */
+@layer components {
+    .app-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        margin-top: auto;
+        border-top: 1px solid var(--border);
+        color: #666670;
+        font-size: 8px;
+        letter-spacing: 0.8px;
+    }
+}
