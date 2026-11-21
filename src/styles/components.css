@@ -9,3 +9,4 @@
 @import "./header.css";                  /* style for Header.tsx                               */
 @import "./footer.css";                  /* style for Footer.tsx                               */
 @import "./notes.css";                   /* style for Notes.tsx, NotesList.tsx, NoteEditor.tsx, NotesPreview.tsx */
+@import "./module-nav.css";              /* style for ModuleNav.tsx                            */
