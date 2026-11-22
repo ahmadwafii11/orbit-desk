@@ -18,6 +18,12 @@ pub enum AppError {
     Storage(String), // Gagal membaca atau menulis penyimpanan di disk.
     NoteNotFound(String), // Catatan dengna id ini tidak ada (misalnya sudah dihapus dari jendela lain).
     NoteTooLarge(usize), // Isi catatan melebihi batas ukuran (dalam byte).
+    FileNotFound, // File atau folder yang diminta tidak tedapat di disk
+    InvalidPath, // Path yang diberikan bukan path absolut
+    AlreadyAdded, // Item tautan yang sama sudah terdapat di storage
+    TooLargeToCopy(u64), // File terlalu besar untuk dicopy (batas copy dalam byte)
+    ItemNotFound(String), // Item dengan suatu id tertentu tidak terdapat dalam storage
+    Open(String), // Gagal dalam membuka file atau folder dengan aplikasi bawaan dari sistem
 }
 
 impl Display for AppError {
@@ -28,7 +34,14 @@ impl Display for AppError {
             Self::UnknownWidget(module) => write!(f, "Widget tidak dikenal: {module}"),
             Self::Storage(message) => write!(f, "Gagal mengakses penyimpanan: {message}"),
             Self::NoteNotFound(id) => write!(f, "Catatan tidak ditemukan: {id}"),
-            Self::NoteTooLarge(max) => write!(f, "Catatan terlalu besar (maksimal {} KB)", max / 1024)
+            Self::NoteTooLarge(max) => write!(f, "Catatan terlalu besar (maksimal {} KB)", max / 1024),
+            Self::FileNotFound => write!(f, "File tidak ditemukan (mungkin telah dipindah atau sudah dihapus)"),
+            Self::InvalidPath => write!(f, "Path harus absolut"),
+            Self::AlreadyAdded => write!(f, "Sudah terdapat di storage"),
+            Self::TooLargeToCopy(max) => write!(f, "Terlalu besar untuk disalin (maksimal {} MB). Tambahkan sebagai tautan", max / (1024 * 1024)),
+            Self::ItemNotFound(id) => write!(f, "Item tidak ditemukan: {id}"),
+            Self::Open(message) => write!(f, "Gagal membuka: {message}"),
+
         }
     }
 }
