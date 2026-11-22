@@ -37,6 +37,13 @@ fn widget_spec(module: &str) -> Option<WidgetSpec> {
             height: 380.0, 
             offset_x: 296.0, 
         }),
+        
+        // Di sebelah kiri widget Notes (296 + lebar 320 + jarak 16).
+        "storage" => Some(WidgetSpec {
+            width: 320.0,
+            height: 380.0,
+            offset_x: 632.0,
+        }),
         _=> None,
     }
 }
