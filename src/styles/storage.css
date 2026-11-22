@@ -1,0 +1,383 @@
+/* style for Storage.tsx, StorageItem.tsx, StoragePreview.tsx */
+.primary-button,
+.secondary-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.primary-button {
+  border: 0;
+  background: #e2d8ff;
+  color: #20182f;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: white;
+}
+
+.secondary-button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: var(--surface-hover);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* Ringkasan di atas daftar */
+
+.storage-overview {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 10px;
+}
+
+.storage-overview-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.storage-overview h2 {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.storage-overview p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* Pilihan Copy / Link */
+
+.mode-toggle {
+  display: flex;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.mode-toggle button {
+  padding: 5px 11px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mode-toggle button.is-active {
+  background: rgba(184, 161, 255, 0.18);
+  color: var(--text);
+}
+
+/* Pesan error / info */
+
+.storage-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: #c9c9d1;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.storage-message.is-error {
+  border-color: rgba(224, 122, 122, 0.4);
+  color: #e8a0a0;
+}
+
+.storage-message button {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: 2px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Filter + pencarian */
+
+.storage-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.storage-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+}
+
+.storage-chips button {
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.storage-chips button span {
+  margin-left: 3px;
+  opacity: 0.7;
+}
+
+.storage-chips button.is-active {
+  border-color: rgba(184, 161, 255, 0.5);
+  background: rgba(184, 161, 255, 0.14);
+  color: var(--text);
+}
+
+.storage-search {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 6px;
+  width: 150px;
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--muted);
+}
+
+.storage-search:focus-within {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.storage-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 11px;
+}
+
+/* Daftar item */
+
+.storage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.storage-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.storage-item:hover {
+  background: var(--surface-hover);
+}
+
+.storage-item.is-missing {
+  opacity: 0.6;
+}
+
+.storage-item-main {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 9px 6px 9px 11px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.storage-item-main:disabled {
+  cursor: default;
+}
+
+.storage-item-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: rgba(184, 161, 255, 0.12);
+  color: var(--accent);
+}
+
+.storage-item-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.storage-item-text strong,
+.storage-item-text > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.storage-item-text strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.storage-item-text > span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.storage-badge-missing {
+  margin-right: 6px;
+  color: #e8a0a0;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.storage-badge {
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.storage-badge-copy {
+  background: rgba(120, 200, 150, 0.14);
+  color: #8fd1a8;
+}
+
+.storage-badge-link {
+  background: rgba(255, 255, 255, 0.07);
+  color: #aaaab5;
+}
+
+.storage-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-right: 7px;
+}
+
+.storage-item-actions button {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.storage-item-actions button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.storage-item-actions button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.storage-item-actions button.is-danger {
+  background: rgba(224, 122, 122, 0.18);
+  color: #e8a0a0;
+}
+
+/* Overlay saat file di-drag ke jendela */
+
+.storage-drop-overlay {
+  position: fixed;
+  inset: 12px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px dashed var(--accent);
+  border-radius: 18px;
+  background: rgba(16, 16, 18, 0.88);
+  color: var(--accent);
+  pointer-events: none;
+}
+
+.storage-drop-overlay strong {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.storage-drop-overlay span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* Keadaan kosong */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 190px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty-state h3 {
+  color: #dddde3;
+  font-size: 13px;
+  margin: 13px 0 4px;
+}
+
+.empty-state p {
+  max-width: 280px;
+  font-size: 10px;
+  line-height: 1.5;
+}
