@@ -37,6 +37,9 @@ pnpm add tailwindcss @tailwindcss/vite \
 pnpm add lucide-react \
 pnpm add react-router-dom \
 pnpm add zustand
+pnpm add @tauri-apps/plugin-dialog
+cd src-tauri, 
+cargo add tauri-plugin-dialog
 
 ## Menjalankan Tauri App
 pnpm tauri dev
