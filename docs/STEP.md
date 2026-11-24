@@ -40,6 +40,8 @@ pnpm add zustand
 pnpm add @tauri-apps/plugin-dialog
 cd src-tauri, 
 cargo add tauri-plugin-dialog
+cargo add rodio
+cargo add lofty
 
 ## Menjalankan Tauri App
 pnpm tauri dev
