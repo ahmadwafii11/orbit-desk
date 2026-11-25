@@ -24,6 +24,10 @@ pub enum AppError {
     TooLargeToCopy(u64), // File terlalu besar untuk dicopy (batas copy dalam byte)
     ItemNotFound(String), // Item dengan suatu id tertentu tidak terdapat dalam storage
     Open(String), // Gagal dalam membuka file atau folder dengan aplikasi bawaan dari sistem
+    Audio(String), // Pemutar audio gagal (perangkat tidak ada, format tidak didukung, dll.)
+    TrackNotFound(String), // Lagu dengan id berikut tidak terdapat di storage
+    FolderNotFound, // Folder musik tidak ada
+    FolderAlreadyAdded, // Folder musik berikut sudah terdapat di storage
 }
 
 impl Display for AppError {
@@ -41,6 +45,10 @@ impl Display for AppError {
             Self::TooLargeToCopy(max) => write!(f, "Terlalu besar untuk disalin (maksimal {} MB). Tambahkan sebagai tautan", max / (1024 * 1024)),
             Self::ItemNotFound(id) => write!(f, "Item tidak ditemukan: {id}"),
             Self::Open(message) => write!(f, "Gagal membuka: {message}"),
+            Self::Audio(message) => write!(f, "{message}"),
+            Self::TrackNotFound(id) => write!(f, "Lagu tidak ditemukan: {id}"),
+            Self::FolderNotFound => write!(f, "Folder tidak ditemukan"),
+            Self::FolderAlreadyAdded => write!(f, "Folder sudah ada di perpustakaan"),
 
         }
     }
