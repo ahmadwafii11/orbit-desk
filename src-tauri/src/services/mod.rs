@@ -5,3 +5,4 @@ pub mod notes_service;
 pub mod storage_service;
 pub mod audio_engine;
 pub mod library_scanner;
+pub mod play_queue;
