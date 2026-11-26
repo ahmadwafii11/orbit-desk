@@ -20,6 +20,7 @@ struct WidgetSpec {
     width: f64,
     height: f64,
     offset_x: f64, // Gesekan ke kiri dari tepi kanan layar agar beberapa widget yang dibuka bersamaan tidak saling menumpuk
+    offset_y: f64, // Geseran ke bawah dari tepi atas, untuk widget yang ditumpuk di bawah widget lain.
 }
 
 // Modul yang tidak terdapat disini tidak dapat dibuka sebagai widget.
@@ -28,7 +29,8 @@ fn widget_spec(module: &str) -> Option<WidgetSpec> {
         "system" => Some(WidgetSpec { 
             width: 288.0, 
             height: 236.0, 
-            offset_x: 0.0 
+            offset_x: 0.0,
+            offset_y: 0.0, 
         }),
 
         // Di sebelah kiri widget System (lebar 280 + jarak 16).
@@ -36,6 +38,7 @@ fn widget_spec(module: &str) -> Option<WidgetSpec> {
             width: 320.0, 
             height: 380.0, 
             offset_x: 296.0, 
+            offset_y: 0.0,
         }),
         
         // Di sebelah kiri widget Notes (296 + lebar 320 + jarak 16).
@@ -43,6 +46,14 @@ fn widget_spec(module: &str) -> Option<WidgetSpec> {
             width: 320.0,
             height: 380.0,
             offset_x: 632.0,
+            offset_y: 0.0,
+        }),
+        // Di bawah widget System (tinggi 236 + jarak 16), satu kolom dengannya.
+        "music" => Some(WidgetSpec {
+            width: 280.0,
+            height: 224.0,
+            offset_x: 0.0,
+            offset_y: 252.0,
         }),
         _=> None,
     }
@@ -60,7 +71,7 @@ fn top_right_position(app: &AppHandle, spec: &WidgetSpec) -> Option<(f64, f64)> 
 
     Some((
         screen_x + screen_width - spec.width - SCREEN_MARGIN_X - spec.offset_x,
-        screen_y + SCREEN_MARGIN_Y,
+        screen_y + SCREEN_MARGIN_Y + spec.offset_y,
     ))
 }
 

@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import { NotesDesktopWidget } from "./NotesDesktopWidget";
 import { StorageDesktopWidget } from "./StorageDesktopWidget";
 import { SystemDesktopWidget } from "./SystemDesktopWidget";
+import { MusicDesktopWidget } from "./MusicDesktopWidget";
 
 // Untuk menambah widget baru: buat komponennya, daftarkan di sini, lalu
 // tambahkan ukurannya di `widget_spec` (src-tauri/src/services/widget_window.rs).
@@ -10,6 +11,7 @@ const widgets: Record<string, ComponentType> = {
   system: SystemDesktopWidget,
   notes: NotesDesktopWidget,
   storage: StorageDesktopWidget,
+  music: MusicDesktopWidget,
 };
 
 export function WidgetApp({ moduleId }: { moduleId: string }) {
