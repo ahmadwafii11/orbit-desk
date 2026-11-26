@@ -12,3 +12,4 @@
 @import "./module-nav.css";              /* style for ModuleNav.tsx                            */
 @import "./storage.css";                 /* style for Storage.tsx, StorageItem.tsx, StoragePreview.tsx */
 @import "./storage-widget.css";          /* style for StorageDesktopWidget.tsx                 */
+@import "./music.css";                   /* style for Music.tsx, NowPlaying.tsx, TrackList.tsx, PlayerControls.tsx, SeekBar.tsx, dan MusicPreview.tsx (serta juga dipakai kartu musik di Dashboard) */
