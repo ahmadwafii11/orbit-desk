@@ -7,13 +7,18 @@ mod repositories;
 #[cfg(test)]
 mod tests;
 
-use std::sync::Arc;
+use std::{
+    sync::Arc,
+    path::PathBuf,
+};
 
 use services::{
     system_monitor::SystemMonitor,
     notes_service::NotesService,
     storage_service::StorageService,
     music_service::MusicService,
+    weather_service::WeatherService,
+    wilayah_index::WilayahIndex,
 };
 use repositories::{
     notes_repository::NotesRepository,
@@ -22,7 +27,8 @@ use repositories::{
 };
 use tauri::{
     Emitter, 
-    Manager, 
+    Manager,
+    path::BaseDirectory, 
 };
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -61,6 +67,20 @@ pub fn run() {
                     }
                 })?;
 
+            // Data wilayah: saat dev dibaca langsung dari folder proyek (tanpa build ulang), saat rilis dari resource yang dibundel.
+            let wilayah_dir: PathBuf = if cfg!(debug_assertions) {
+                PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("resources/region_data")
+            } else {
+                app.path()
+                    .resolve("resources/region_data", BaseDirectory::Resource)?
+            };
+            let weather = WeatherService::new(
+                WilayahIndex::load_dir(&wilayah_dir),
+                JsonFile::new(data_dir.join("weather-places.json")),
+                JsonFile::new(data_dir.join("weather-cache.json")),
+            )?;
+            app.manage(Arc::new(weather));
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -94,6 +114,14 @@ pub fn run() {
             commands::music::music_set_volume,
             commands::music::music_set_shuffle,
             commands::music::music_set_repeat,
+            commands::weather::weather_places,
+            commands::weather::weather_add_place,
+            commands::weather::weather_remove_place,
+            commands::weather::weather_set_default,
+            commands::weather::weather_get,
+            commands::weather::wilayah_info,
+            commands::weather::wilayah_children,
+            commands::weather::wilayah_search,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");  
