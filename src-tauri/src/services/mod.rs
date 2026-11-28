@@ -10,3 +10,4 @@ pub mod music_service;
 pub mod wilayah_index;
 pub mod bmkg_client;
 pub mod weather_calc;
+pub mod weather_service;
