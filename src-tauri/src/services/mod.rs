@@ -7,3 +7,4 @@ pub mod audio_engine;
 pub mod library_scanner;
 pub mod play_queue;
 pub mod music_service;
+pub mod wilayah_index;
