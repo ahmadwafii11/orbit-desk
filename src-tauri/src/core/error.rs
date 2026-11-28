@@ -28,6 +28,10 @@ pub enum AppError {
     TrackNotFound(String), // Lagu dengan id berikut tidak terdapat di storage
     FolderNotFound, // Folder musik tidak ada
     FolderAlreadyAdded, // Folder musik berikut sudah terdapat di storage
+    Network(String),      // Gagal terhubung ke layanan jaringan / API BMKG
+    WeatherParse(String), // Gagal melakukan parsing respons data cuaca dari BMKG
+    PlaceNotFound(String), // Kode wilayah / lokasi tidak ditemukan
+    TooManyPlaces(usize), // Jumlah lokasi yang tersimpan sudah mencapai batas maksimal
 }
 
 impl Display for AppError {
@@ -49,7 +53,10 @@ impl Display for AppError {
             Self::TrackNotFound(id) => write!(f, "Lagu tidak ditemukan: {id}"),
             Self::FolderNotFound => write!(f, "Folder tidak ditemukan"),
             Self::FolderAlreadyAdded => write!(f, "Folder sudah ada di perpustakaan"),
-
+            Self::Network(message) => write!(f, "Tidak bisa menghubungi BMKG: {message}"),
+            Self::WeatherParse(message) => write!(f, "Data BMKG tidak dikenali: {message}"),
+            Self::PlaceNotFound(code) => write!(f, "Lokasi tidak ditemukan: {code}"),
+            Self::TooManyPlaces(max) => write!(f, "Maksimal {max} lokasi tersimpan"),
         }
     }
 }
