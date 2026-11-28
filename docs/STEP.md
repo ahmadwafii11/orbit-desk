@@ -42,6 +42,7 @@ cd src-tauri,
 cargo add tauri-plugin-dialog
 cargo add rodio
 cargo add lofty
+cargo add ureq
 
 ## Menjalankan Tauri App
 pnpm tauri dev
